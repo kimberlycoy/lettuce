@@ -104,7 +104,7 @@ class Command(BaseCommand):
         apps_to_avoid = tuple(options.get('avoid_apps', '').split(","))
         run_server = not options.get('no_server', False)
         tags = options.get('tags', None)
-        server = Server(port=options['port'], address=options['address'])
+        server = Server(address=options['address'], port=options['port'])
 
         paths = self.get_paths(args, apps_to_run, apps_to_avoid)
         if run_server:
