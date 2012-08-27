@@ -52,6 +52,9 @@ class Command(BaseCommand):
         make_option('-P', '--port', type='int', dest='port',
             help="the port in which the HTTP server will run at"),
 
+        make_option('-D', '--address', dest='address',
+            help="the address in which the HTTP server will run at"),
+
         make_option('-d', '--debug-mode', action='store_true', dest='debug', default=False,
             help="when put together with builtin HTTP server, forces django to run with settings.DEBUG=True"),
 
@@ -101,7 +104,7 @@ class Command(BaseCommand):
         apps_to_avoid = tuple(options.get('avoid_apps', '').split(","))
         run_server = not options.get('no_server', False)
         tags = options.get('tags', None)
-        server = Server(port=options['port'])
+        server = Server(port=options['port'], address=options['address'])
 
         paths = self.get_paths(args, apps_to_run, apps_to_avoid)
         if run_server:
