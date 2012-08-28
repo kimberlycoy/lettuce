@@ -27,6 +27,7 @@ from lettuce import registry
 
 from lettuce.django.server import Server
 from lettuce.django import harvest_lettuces
+from lettuce import django
 from lettuce.django.server import LettuceServerException
 
 
@@ -116,6 +117,8 @@ class Command(BaseCommand):
                 self.startserver(server)
             except LettuceServerException, e:
                 raise SystemExit(e)
+
+        django.django_url = server.url
 
         os.environ['SERVER_NAME'] = server.address
         os.environ['SERVER_PORT'] = str(server.port)
