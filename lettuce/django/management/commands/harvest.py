@@ -94,6 +94,9 @@ class Command(BaseCommand):
 
         return paths
 
+    def startserver(self, server):
+        server.start()
+
     def handle(self, *args, **options):
         setup_test_environment()
 
@@ -104,12 +107,13 @@ class Command(BaseCommand):
         apps_to_avoid = tuple(options.get('avoid_apps', '').split(","))
         run_server = not options.get('no_server', False)
         tags = options.get('tags', None)
+
         server = Server(address=options['address'], port=options['port'])
 
         paths = self.get_paths(args, apps_to_run, apps_to_avoid)
         if run_server:
             try:
-                server.start()
+                self.startserver(server)
             except LettuceServerException, e:
                 raise SystemExit(e)
 
