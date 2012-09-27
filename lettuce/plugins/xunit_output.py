@@ -35,7 +35,7 @@ def enable(filename=None):
 
     doc = minidom.Document()
     root = doc.createElement("testsuite")
-    root.setAttribute("name", "lettuce")
+    root.setAttribute("name", "lettuce" + (filename or ""))
     root.setAttribute("hostname", "localhost")
     root.setAttribute("timestamp", datetime.now().strftime("%Y-%m-%dT%H:%M:%S"))
     output_filename = filename or "lettucetests.xml"
